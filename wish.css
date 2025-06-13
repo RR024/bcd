@@ -1,0 +1,513 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF69B4' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"), auto;
+}
+
+/* Animated Background */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #00FFFF 0%, #E6E6FA 100%);
+    overflow: hidden;
+}
+
+.floating {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.balloon {
+    width: 50px;
+    height: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 60'%3E%3Cpath d='M25,1 C38,1 45,13 45,23 C45,33 38,43 25,43 C12,43 5,33 5,23 C5,13 12,1 25,1 Z' fill='%23FF69B4'/%3E%3Cpath d='M25,43 L25,58' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M20,58 L30,58' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E");
+    animation: float 15s linear infinite;
+}
+
+.star {
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20,1 L24,14 L38,14 L27,22 L31,36 L20,28 L9,36 L13,22 L2,14 L16,14 Z' fill='%23FFD700'/%3E%3C/svg%3E");
+    animation: twinkle 10s linear infinite;
+}
+
+.cake {
+    width: 60px;
+    height: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Crect x='10' y='30' width='40' height='20' fill='%23FF9E9E'/%3E%3Crect x='5' y='50' width='50' height='5' fill='%23C97676'/%3E%3Cpath d='M20,30 L20,15 M30,30 L30,15 M40,30 L40,15' stroke='%23333' stroke-width='2'/%3E%3Ccircle cx='20' cy='15' r='3' fill='%23FFD700'/%3E%3Ccircle cx='30' cy='15' r='3' fill='%23FFD700'/%3E%3Ccircle cx='40' cy='15' r='3' fill='%23FFD700'/%3E%3C/svg%3E");
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(120vh) rotate(0deg); }
+    100% { transform: translateY(-20vh) rotate(360deg); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    max-width: 90%;
+    width: 700px;
+    margin: 20px auto;
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    color: #8A2BE2;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: colorChange 5s infinite alternate;
+}
+
+@keyframes colorChange {
+    0% { color: #8A2BE2; }
+    50% { color: #FF69B4; }
+    100% { color: #00BFFF; }
+}
+
+/* Photo Gallery */
+/* Round Photo Gallery */
+.photo-gallery {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    perspective: 1000px;
+}
+
+.gallery-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.photo-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Change from rectangular to circular */
+    border: 8px solid white;
+    border-radius: 50%; /* Change from 10px to 50% for perfect circle */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* You may want to add this to make sure images are also cropped in a circle */
+    border-radius: 50%;
+}
+
+.photo-placeholder {
+    color: #aaa;
+    font-size: 1em;
+    padding: 20px;
+    text-align: center;
+    /* Optional: adjust text size for the circular container */
+    width: 80%;
+}
+.gallery-prev, .gallery-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px ;
+    height: 40px;
+    background: rgba(138, 43, 226, 0.7);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.gallery-prev:hover, .gallery-next:hover {
+    background: rgba(138, 43, 226, 1);
+}
+
+.gallery-prev {
+    left: -20px;
+}
+
+.gallery-next {
+    right: -20px;
+}
+
+/* 3D Countdown */
+.countdown {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.countdown-item {
+    margin: 0 15px;
+    min-width: 80px;
+    perspective: 500px;
+}
+
+.countdown-number {
+    font-size: 3em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #00FFFF, #B57EDC);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.countdown-number.flip {
+    animation: flip 0.5s;
+}
+
+@keyframes flip {
+    0% { transform: rotateX(0); }
+    50% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0); }
+}
+
+.countdown-label {
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: #666;
+}
+
+/* Messages Section */
+.messages-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.messages-title {
+    font-size: 1.5em;
+    color: #8A2BE2;
+    font-weight: bold;
+}
+
+.messages-container {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.message-item {
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.message-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+.message-author {
+    font-weight: bold;
+    color: #8A2BE2;
+    margin-bottom: 5px;
+}
+
+.message-text {
+    color: #555;
+}
+
+.message-form {
+    display: flex;
+    gap: 10px;
+}
+
+.message-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid #8A2BE2;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.message-input:focus {
+    border-color: #FF69B4;
+}
+
+.submit-message {
+    background: #8A2BE2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-message:hover {
+    background: #FF69B4;
+}
+
+/* Timeline Section with Hover Effect */
+.timeline-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.timeline-title {
+    font-size: 1.5em;
+    color: #8A2BE2;
+    font-weight: bold;
+}
+
+/* Timeline container with central line */
+.timeline-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Change the absolute positioning to have a specific height */
+.timeline-line {
+    position: absolute;
+    width: 6px;
+    background-color: #f5f5f5;
+    top: 0;
+    /* Set a specific height instead of extending to bottom */
+    height: calc(100% - 200px); /* Adjust this value as needed */
+    left: 50%;
+    margin-left: -3px;
+    z-index: 1;
+}
+
+
+/* General timeline event styling */
+.timeline-event {
+    padding: 15px;
+    position: relative;
+    margin: 40px 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Left side timeline events */
+.timeline-event.left {
+    width: 45%;
+    margin-right: auto;
+    margin-left: 0;
+    text-align: right;
+}
+
+/* Right side timeline events */
+.timeline-event.right {
+    width: 45%;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: left;
+}
+
+.timeline-event:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    z-index: 10;
+}
+
+/* Timeline event markers */
+.timeline-event::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background: #FF69B4;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(138, 43, 226, 0.3);
+    z-index: 3;
+}
+
+/* Position markers for left and right events */
+.timeline-event.left::before {
+    right: -50px;
+}
+
+.timeline-event.right::before {
+    left: -50px;
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: #8A2BE2;
+    margin-bottom: 5px;
+}
+
+.timeline-description {
+    color: #555;
+}
+
+/* Add this CSS to your stylesheet (wish.css or wish-2.css) */
+
+/* Improve the timeline hover preview sizing */
+.timeline-hover-preview {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  width: 300px; /* Fixed width for consistency */
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  z-index: 100;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.timeline-event:hover .timeline-hover-preview {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Position the preview based on whether it's a left or right event */
+.timeline-event.left .timeline-hover-preview {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 20px;
+}
+
+.timeline-event.right .timeline-hover-preview {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 20px;
+}
+
+/* Improve the preview image container */
+.preview-image {
+  width: 100%;
+  height: 200px; /* Fixed height */
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This ensures the image covers the container nicely */
+  display: block;
+}
+
+.preview-text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #444;
+} 
+
+/* Media Queries for Timeline */
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 20px;
+        transform: none;
+    }
+    
+    .timeline-event.left,
+    .timeline-event.right {
+        width: 80%;
+        margin-left: 40px !important;
+        margin-right: 0 !important;
+        text-align: left;
+    }
+    
+    .timeline-event.left::before,
+    .timeline-event.right::before {
+        left: -30px !important;
+        right: auto !important;
+    }
+    
+    /* On mobile, always show preview on the right */
+    .timeline-event.left .timeline-hover-preview,
+    .timeline-event.right .timeline-hover-preview {
+        left: auto;
+        right: -230px;
+        top: 0;
+    }
+    
+    /* For very small screens */
+    @media (max-width: 480px) {
+        .timeline-event.left .timeline-hover-preview,
+        .timeline-event.right .timeline-hover-preview {
+            width: 180px;
+            right: -190px;
+        }
+        
+        .preview-image {
+            height: 100px;
+        }
+    }
+}

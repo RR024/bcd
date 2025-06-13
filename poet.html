@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kutty Kavithai For You</title>
+    <style>
+        /* Root variables */
+        :root {
+            --primary-color: #8A2BE2;
+            --accent-color: #FF69B4;
+            --text-color: #333;
+            --light-color: #E6E6FA;
+            --highlight-color: #00BFFF;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #F5F0FF 0%, #E6E6FA 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .poetry-container {
+            position: relative;
+            z-index: 2;
+            margin: 60px auto 30px;
+            max-width: 800px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 30px rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .poetry-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--highlight-color), var(--primary-color), var(--accent-color));
+            background-size: 200% 100%;
+            animation: gradient-shift 8s infinite linear;
+        }
+
+        .poetry-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .poetry-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .poetry-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .poetry-content {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .poetry-content p {
+            margin-bottom: 20px;
+        }
+
+        .poetry-footer {
+            text-align: right;
+            font-style: italic;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+        }
+        
+        .back-button:active {
+            transform: translateY(1px);
+        }
+        
+        .back-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .back-button:hover::before {
+            left: 100%;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Decorative elements */
+        .decorative-element {
+            position: absolute;
+            color: var(--primary-color);
+            opacity: 0.1;
+            font-size: 80px;
+            z-index: -1;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--accent-color);
+            opacity: 0;
+            animation: float-up 6s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(1.2) rotate(20deg);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .poetry-container {
+                padding: 25px 20px;
+                margin: 40px 15px;
+            }
+            
+            .poetry-header h1 {
+                font-size: 2rem;
+            }
+            
+            .poetry-content {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hearts animation -->
+    <div class="hearts" id="hearts-container"></div>
+
+    <!-- Decorative elements -->
+    <div class="decorative-element" style="top: 10%; left: 5%;">❣️</div>
+    <div class="decorative-element" style="bottom: 10%; right: 5%;">❣️</div>
+
+    <!-- Main content -->
+    <div class="poetry-container">
+        <div class="poetry-header">
+            <h1>Kutty Kavithai For You</h1>
+        </div>
+        
+        <div class="poetry-content">
+            <!-- Replace this with your actual poetry content -->
+            <p>சினம் கொண்டு அகம் வெடிக்கும்,<br>
+                சிந்தும் எழில் ஸ்நேகிதியே...<br>
+                உன் மொழியின்றி என் நெஞ்சம்<br>
+                ஊமையாய் கிடக்குதடி</p>
+            
+            <p>சுற்றும் உன் விழிகளுக்கு,<br>
+                யுத்தங்கள் ஒவ்வாதே...<br>
+                நீயற்ற இடைவெளிகள்,<br>
+                நறுமணத்தை கொய்யாதே...</p>
+            
+            <p>காலை நேர கிளிகளுமே<br>
+                உன் பெயரை பிதற்றுதடி...<br>
+                மாலை அது வந்துவிட்டால்,<br>
+                அகம் ஏங்கி தவிக்குதடி...</p>
+            
+            <p>உனை எண்ணி ஒரு நாளை,<br>
+                நான் எண்ணி பார்த்தேனோ...<br>
+                நானின்றி உன் நாட்கள்<br>
+                எவ்வாறு நகருதடி..?</p>
+            
+            <p>கனவெல்லாம் உன் வருகை<br>
+                நொடியெல்லாம் நிகழுதடி...<br>
+                நிஜமெல்லாம் கண்ணீராய்<br>
+                கன்னத்தில் சருக்குத்தடி</p>
+
+            <p>சிங்காரம் செய்யாமலே<br>
+                சிறை பிடித்த சிறுகிளியே...<br>
+                சிரிப்பொன்று தாயேண்டி<br>
+                நான் உயிர் கொண்டு வாழ்ந்திடவே...!!!</p>            
+            <div class="poetry-footer">
+                ~RR
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <a href="index.html" class="back-button">
+                <span>← Back </span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts animation
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                
+                // Random positions and timing
+                const left = Math.random() * 100;
+                const size = Math.random() * 1 + 0.5;
+                const animationDelay = Math.random() * 6;
+                
+                heart.style.left = left + 'vw';
+                heart.style.fontSize = size + 'em';
+                heart.style.animationDelay = animationDelay + 's';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Start animation when page loads
+        window.addEventListener('load', createHearts);
+    </script>
+</body>
+</html>

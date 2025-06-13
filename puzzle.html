@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Puzzle Game</title>
+  <style>
+    :root {
+      --primary-color: #4e54c8;
+      --secondary-color: #8f94fb;
+      --accent-color: #ff7e5f;
+      --text-color: #ffffff;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      --transition-speed: 0.3s;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e2234, #2a2e4a);
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    #puz, #puzz {
+      position: absolute;
+      border-radius: var(--border-radius);    
+      user-select: none;
+      transition: all var(--transition-speed) ease;
+    }
+
+    #puzz i {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    #puz {
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 3px dashed var(--secondary-color);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: all 0.5s ease;
+    }
+
+    #puzz {
+      left: 0;
+      top: 0;
+      border: 0;
+    }
+
+    #puz i {
+      float: left;
+      width: 100px;
+      height: 100px;
+      outline: 1px dashed rgba(255, 255, 255, 0.3);
+      transition: all var(--transition-speed) ease;
+    }
+
+    #puzz i {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: var(--color);
+      background-image: var(--image);
+      background-size: 300px 300px;
+      cursor: move;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      transition: all var(--transition-speed) ease;
+      border: 2px solid transparent;
+    }
+
+    #puzz i:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .first {
+      border-top-left-radius: var(--border-radius);
+      background-position: left top !important;
+    }
+    .secon {
+      background-position: center top !important;
+    }
+    .third {
+      background-position: right top !important;
+    }
+    .fourt {
+      background-position: left center !important;
+    }
+    .fifth {
+      background-position: center center !important;
+    }
+    .sixth {  
+      background-position: right center !important;
+    }
+    .seven {
+      background-position: left bottom !important;
+    }
+    .eight {
+      background-position: center bottom !important;
+    }
+    .ninth {
+      border-bottom-right-radius: var(--border-radius);
+      background-position: right bottom !important;
+    }
+
+    .clicked {
+      box-shadow: 0 0 0 4px var(--accent-color) !important;
+      transform: scale(1.1);
+      z-index: 100;
+    }
+
+    .dropped {
+      background: var(--color);
+      background-image: var(--image);
+      background-size: 300px 300px;
+    }
+    
+    .done {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.8);
+    }
+
+    .allDone {
+      animation: allDone 1.5s ease-in-out forwards;
+      border: 3px solid var(--accent-color) !important;
+    }
+    
+    .allDone i {
+      outline: 0 !important;
+    }
+
+    @keyframes allDone {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 50px var(--accent-color); }
+      100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px var(--accent-color); }
+    }
+
+    #clicks {
+      font-size: 14px;
+      font-family: 'Courier New', monospace;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      color: var(--text-color);
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 8px 12px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #clicks::before {
+      content: "Moves: ";
+      font-weight: bold;
+    }
+
+    #completion-message {
+      position: absolute;
+      top: calc(40% + 160px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      text-align: center;
+      z-index: 100;
+      color: var(--text-color);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      animation: fadeIn 1s forwards;
+    }
+
+    #completion-message h3 {
+      margin: 10px 0;
+    }
+
+    #button-container {
+      position: absolute;
+      top: calc(40% + 260px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      text-align: center;
+      z-index: 100;
+    }
+
+    button {
+      display: inline-block;
+      border-radius: 30px;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      color: var(--text-color);
+      text-align: center;
+      font-size: 18px;
+      padding: 15px;
+      width: 220px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    button span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+
+    button span:after {
+      content: '»';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -15px;
+      transition: 0.5s;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    button:hover span {
+      padding-right: 25px;
+    }
+
+    button:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* Adding subtle background animation */
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #232526, #2c3e50, #1f2937, #1a1a2e);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: gradient 15s ease infinite;
+    }
+  </style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id='puz_box'>
+  <div id='puz'>
+    <i class='first' ondrop='drop(event)' ondragover='allowDrop(event)' ></i>
+    <i class='secon' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='third' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='fourt' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='fifth' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='sixth' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='seven' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='eight' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+    <i class='ninth' ondrop='drop(event)' ondragover='allowDrop(event)'></i>
+  </div>
+  <div id='puzz'>
+    <i class='third' draggable='true' ondragstart='drag(event)'></i>
+    <i class='first' draggable='true' ondragstart='drag(event)'></i>
+    <i class='secon' draggable='true' ondragstart='drag(event)'></i>
+    <i class='fourt' draggable='true' ondragstart='drag(event)'></i>
+    <i class='fifth' draggable='true' ondragstart='drag(event)'></i>
+    <i class='sixth' draggable='true' ondragstart='drag(event)'></i>
+    <i class='seven' draggable='true' ondragstart='drag(event)'></i>
+    <i class='eight' draggable='true' ondragstart='drag(event)'></i>
+    <i class='ninth' draggable='true' ondragstart='drag(event)'></i>  
+  </div>
+  
+  <div id="completion-message">
+    <h3>Congratulations on your first level of your gift..!!</h3>
+    <h3>Now let us continue with the second level☺️</h3>
+  </div>
+  
+  <div id="button-container">
+    <button onclick="goToNextPage()">
+      <span>Continue</span>
+    </button>
+  </div>
+</div>
+
+<div id='clicks'>0</div>
+
+<!-- partial -->
+  <script>
+   var images = ['./photos/photo.jpg']; // Adding proper path reference
+
+var currentIndex = 0;
+var totalClicks = 0;
+
+function randomizeImage() {
+  let root = document.documentElement;
+  root.style.setProperty('--image', 'url(' + images[currentIndex] + ')');
+  currentIndex++;
+  if (currentIndex >= images.length) {
+    currentIndex = 0;
+  }
+  var puzzleItems = document.querySelectorAll('#puzz i');
+  for (var i = 0; i < puzzleItems.length; i++) {
+    puzzleItems[i].style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    puzzleItems[i].style.top = Math.random() * (window.innerHeight - 100) + 'px';
+  }
+}
+
+randomizeImage();
+
+// Rest of your JavaScript remains the same
+function reloadPuzzle() {
+  var doneItems = document.querySelectorAll('.done');
+  doneItems.forEach(function (element) {
+    element.classList.toggle('done');
+  });
+  var droppedItems = document.querySelectorAll('.dropped');
+  droppedItems.forEach(function (element) {
+    element.classList.toggle('dropped');
+  });
+  var allDoneElement = document.querySelector('.allDone');
+  if (allDoneElement) {
+    allDoneElement.style = '';
+    allDoneElement.classList.toggle('allDone');
+  }
+  
+  // Hide the message and button container
+  document.getElementById('completion-message').style.display = 'none';
+  document.getElementById('button-container').style.display = 'none';
+}
+
+function goToNextPage() {
+  // Change this URL to your destination page
+  window.location.href = "quiz.html";
+}
+
+// mobile functionality
+var puzzleItemsMobile = document.querySelectorAll('#puzz i');
+puzzleItemsMobile.forEach(function (element) {
+  element.addEventListener('mousedown', function () {
+    totalClicks++;
+    document.querySelector('#clicks').innerHTML = totalClicks;
+  });
+  element.addEventListener('click', function () {
+    if (document.querySelector('.clicked')) {
+      document.querySelector('.clicked').classList.toggle('clicked');
+      element.classList.toggle('clicked');
+    } else {
+      element.classList.toggle('clicked');
+    }
+  });
+});
+
+var puzzleItemsDesktop = document.querySelectorAll('#puz i');
+puzzleItemsDesktop.forEach(function (element) {
+  element.addEventListener('click', function () {
+    if (document.querySelector('.clicked')) {
+      var clickedElement = document.querySelector('.clicked');
+      if (clickedElement.classList.contains(element.classList)) {
+        element.classList.add('dropped');
+        clickedElement.classList.add('done');
+        clickedElement.classList.toggle('clicked');
+
+        if (document.querySelectorAll('.dropped').length == 9) {
+          document.querySelector('#puz').classList.add('allDone');
+          document.querySelector('#puz').style.border = 'none';
+          document.querySelector('#puz').style.animation = 'allDone 1s linear forwards';
+
+          // Show the completion message and button container
+          setTimeout(function () {
+            document.getElementById('completion-message').style.display = 'block';
+            document.getElementById('button-container').style.display = 'block';
+          }, 1000);
+        }
+      }
+    }
+  });
+});
+
+// desktop drag and drop
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.className);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+
+  if (ev.target.className == data) {
+    ev.target.classList.add('dropped');
+    document.querySelector('.' + data + "[draggable='true']").classList.add('done');
+
+    if (document.querySelectorAll('.dropped').length == 9) {
+      document.querySelector('#puz').classList.add('allDone');
+      document.querySelector('#puz').style.border = 'none';
+      document.querySelector('#puz').style.animation = 'allDone 1s linear forwards';
+
+      // Show the completion message and button container
+      setTimeout(function () {
+        document.getElementById('completion-message').style.display = 'block';
+        document.getElementById('button-container').style.display = 'block';
+      }, 1000);
+    }
+  }
+}
+  </script>
+</body>
+</html>

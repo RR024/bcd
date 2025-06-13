@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Photo Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gallery.css"
+</head>
+<body>
+  <header>
+    <div class="floating-hearts">
+      <!-- Hearts will be added with JavaScript -->
+    </div>
+    <div class="container">
+      <h1>Happy Birthday!</h1>
+      <div class="subtitle">A gallery of our favorite memories</div>
+    </div>
+  </header>
+  
+  <section class="intro">
+    <p>On this special day, we wanted to celebrate you by sharing some of our favorite memories together. Each photo represents a moment we've cherished and a reason why you're so special to us. Here's to many more incredible memories to come!</p>
+    <a href="#gallery" class="button">View Memories <i class="fas fa-heart"></i></a>
+  </section>
+  
+  <section id="gallery" class="gallery container">
+    <!-- Gallery items will be added dynamically -->
+  </section>
+
+  <section class="music-section">
+    <!-- Floating music notes -->
+    <div class="music-note"><i class="fas fa-music"></i></div>
+    <div class="music-note"><i class="fas fa-music"></i></div>
+    <div class="music-note"><i class="fas fa-music"></i></div>
+    <div class="music-note"><i class="fas fa-music"></i></div>
+    
+    <div class="music-container">
+      <h2>Songs from the Heart</h2>
+      <p class="music-subtitle">Special songs sung by my talented friend, just for you!</p>
+      
+      <div class="music-grid">
+        <!-- Song Card 1 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <div class="song-details">
+              <h3>Oh Oh</h3>
+              <p>Neethan ye penne</p>
+            </div>
+          </div>
+          <audio class="audio-player" preload="metadata">
+            <source src="./photos/aud-1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="time-display">0:00 / 0:00</div>
+          </div>
+          <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" min="0" max="100" value="50">
+          </div>
+        </div>
+
+        <!-- Song Card 2 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="song-details">
+              <h3>Kondattam</h3>
+              <p>Un nenapula thanae</p>
+            </div>
+          </div>
+          <audio class="audio-player" preload="metadata">
+            <source src="./photos/aud-2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="time-display">0:00 / 0:00</div>
+          </div>
+          <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" min="0" max="100" value="50">
+          </div>
+        </div>
+
+        <!-- Song Card 3 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="song-details">
+              <h3>Nee yenadharugil Nee</h3>
+              <p>Pogathathu sagathathu unodu en yosanai</p>
+            </div>
+          </div>
+          <audio class="audio-player" preload="metadata">
+            <source src="./photos/aud-3.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="time-display">0:00 / 0:00</div>
+          </div>
+          <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" min="0" max="100" value="50">
+          </div>
+        </div>
+        <!-- Song Card 4 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">
+              <i class="fas fa-gift"></i>
+            </div>
+            <div class="song-details">
+              <h3>Pathavaikum paarvaikara</h3>
+              <p>saachupotuta..</p>
+            </div>
+          </div>
+          <audio class="audio-player" preload="metadata">
+            <source src="../wish/photos/aud-4.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="time-display">0:00 / 0:00</div>
+          </div>
+          <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" min="0" max="100" value="50">
+          </div>
+        </div>
+      </div>
+
+      <div class="now-playing" id="nowPlaying" style="display: none;">
+        <h3>Now Playing</h3>
+        <p id="currentSong">-</p>
+        <div class="equalizer">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+  <section class="memory-section">
+    <div class="memory-content">
+      <h2>Our Journey Together</h2>
+      <p>From our first adventures to our most recent celebrations, every moment with you has been nothing short of amazing. Your kindness, laughter, and incredible spirit make every day brighter.</p>
+      <p>This birthday is not just a celebration of another year, but a celebration of you and all the joy you bring to everyone around you.</p>
+      <p>We hope these photos bring back wonderful memories and remind you of how loved you truly are.</p>
+    </div>
+  </section>
+  
+  <section class="quotes-section container">
+    <h2>Birthday Wishes</h2>
+    <div class="quote-container">
+      <p class="quote">Wishing you a day filled with happiness and a year filled with joy. Happy birthday to a person who touches each life they enter – making the world a better place. May your day be as special as you are!</p>
+      <p class="quote-author">— With love from all of us</p>
+    </div>
+  </section>
+  
+  <div class="lightbox">
+    <span class="close">&times;</span>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="">
+      <div class="lightbox-caption"></div>
+    </div>
+    <span class="prev"><i class="fas fa-chevron-left"></i></span>
+    <span class="next"><i class="fas fa-chevron-right"></i></span>
+  </div>
+  <center>
+  <div class="final">
+    <h3>Atlast you finally reached the last part of your gift</h3>
+    <h3>If you wanna see it click the button...</h3>
+  </div>
+<br>
+<div class="btn-conteiner">
+  <a class="btn-content" href="final.html">
+    <span class="btn-title">Message for you</span>
+    <span class="icon-arrow">
+      <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path id="arrow-icon-one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+          <path id="arrow-icon-two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+          <path id="arrow-icon-three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+        </g>
+      </svg>
+    </span> 
+  </a>
+</div>
+</center>
+  <footer>
+    <p>Made with ❤️ for your special day</p>
+  </footer>
+  
+  <script>
+    // Array of gallery items
+    const galleryItems = [
+      { img: 'photos/gh-1.png', caption: 'Our trip to the beach last summer' },
+      { img: 'photos/ph-6.jpg', caption: 'That amazing concert we went to' },
+      { img: 'photos/ph-1.jpg', caption: 'Your surprise party last year' },
+      { img: 'photos/ph-2.jpg', caption: 'Hiking adventure in the mountains' },
+      { img: 'photos/ph-3.jpg', caption: 'Game night with everyone' },
+      { img: 'photos/ph-5.jpg', caption: 'Coffee date at our favorite spot' },
+      { img: 'photos/ph-8.jpg', caption: 'That time we went camping' },
+      { img: 'photos/ph-7.jpg', caption: 'Road trip adventures' },
+      { img: 'photos/gh-2.png', caption: 'Holiday celebrations' }
+    ];
+    
+    // Populate gallery
+    const gallery = document.querySelector('.gallery');
+    
+    galleryItems.forEach((item, index) => {
+      const galleryItem = document.createElement('div');
+      galleryItem.className = 'gallery-item';
+      galleryItem.dataset.index = index;
+      
+      galleryItem.innerHTML = `
+        <img src="${item.img}" alt="${item.caption}">
+        <div class="item-caption">${item.caption}</div>
+      `;
+      
+      gallery.appendChild(galleryItem);
+    });
+    
+    // Lightbox functionality
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const lightboxCaption = document.querySelector('.lightbox-caption');
+    const close = document.querySelector('.close');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    
+    let currentIndex = 0;
+    
+    // Open lightbox
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', function() {
+        currentIndex = parseInt(this.dataset.index);
+        updateLightbox();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // Close lightbox
+    close.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+    
+    // Next image
+    next.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      updateLightbox();
+    });
+    
+    // Previous image
+    prev.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      updateLightbox();
+    });
+    
+    // Update lightbox content
+    function updateLightbox() {
+      const item = galleryItems[currentIndex];
+      lightboxImg.src = item.img;
+      lightboxImg.alt = item.caption;
+      lightboxCaption.textContent = item.caption;
+    }
+    
+    // Close lightbox with escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        updateLightbox();
+      }
+      if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        updateLightbox();
+      }
+    });
+    
+    // Floating hearts animation
+    const floatingHearts = document.querySelector('.floating-hearts');
+    
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '<i class="fas fa-heart"></i>';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = 3 + Math.random() * 10 + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.opacity = Math.random() * 0.7;
+      heart.style.fontSize = 10 + Math.random() * 20 + 'px';
+      floatingHearts.appendChild(heart);
+    }
+    
+    // Add decorative elements
+    for (let i = 0; i < 10; i++) {
+      const decoration = document.createElement('div');
+      decoration.className = 'decoration';
+      decoration.style.top = Math.random() * 100 + '%';
+      decoration.style.left = Math.random() * 100 + '%';
+      decoration.style.opacity = Math.random() * 0.5;
+      decoration.style.transform = `scale(${Math.random() * 2})`;
+      document.body.appendChild(decoration);
+    }
+    class MusicPlayer {
+      constructor() {
+        this.currentAudio = null;
+        this.currentCard = null;
+        this.init();
+      }
+
+      init() {
+        const songCards = document.querySelectorAll('.song-card');
+        
+        songCards.forEach(card => {
+          const audio = card.querySelector('.audio-player');
+          const playBtn = card.querySelector('.play-btn');
+          const progressContainer = card.querySelector('.progress-container');
+          const progressBar = card.querySelector('.progress-bar');
+          const timeDisplay = card.querySelector('.time-display');
+          const volumeSlider = card.querySelector('.volume-slider');
+          
+          // Set initial volume
+          audio.volume = volumeSlider.value / 100;
+          
+          // Play/Pause functionality
+          playBtn.addEventListener('click', () => {
+            this.togglePlay(audio, playBtn, card);
+          });
+          
+          // Progress bar functionality
+          progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+          });
+          
+          // Volume control
+          volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+          });
+          
+          // Update progress and time
+          audio.addEventListener('timeupdate', () => {
+            this.updateProgress(audio, progressBar, timeDisplay);
+          });
+          
+          // Handle song end
+          audio.addEventListener('ended', () => {
+            this.resetPlayer(playBtn, card);
+          });
+          
+          // Handle metadata load
+          audio.addEventListener('loadedmetadata', () => {
+            this.updateTimeDisplay(audio, timeDisplay);
+          });
+        });
+      }
+
+      togglePlay(audio, playBtn, card) {
+        // Pause any currently playing audio
+        if (this.currentAudio && this.currentAudio !== audio) {
+          this.currentAudio.pause();
+          this.resetPlayer(this.currentCard.querySelector('.play-btn'), this.currentCard);
+        }
+
+        if (audio.paused) {
+          audio.play();
+          playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          this.currentAudio = audio;
+          this.currentCard = card;
+          this.showNowPlaying(card);
+        } else {
+          audio.pause();
+          playBtn.innerHTML = '<i class="fas fa-play"></i>';
+          this.hideNowPlaying();
+        }
+      }
+
+      resetPlayer(playBtn, card) {
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        const progressBar = card.querySelector('.progress-bar');
+        progressBar.style.width = '0%';
+        this.hideNowPlaying();
+        this.currentAudio = null;
+        this.currentCard = null;
+      }
+
+      updateProgress(audio, progressBar, timeDisplay) {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = percent + '%';
+          this.updateTimeDisplay(audio, timeDisplay);
+        }
+      }
+
+      updateTimeDisplay(audio, timeDisplay) {
+        const currentTime = this.formatTime(audio.currentTime || 0);
+        const duration = this.formatTime(audio.duration || 0);
+        timeDisplay.textContent = `${currentTime} / ${duration}`;
+      }
+
+      formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      showNowPlaying(card) {
+        const nowPlaying = document.getElementById('nowPlaying');
+        const currentSong = document.getElementById('currentSong');
+        const songTitle = card.querySelector('.song-details h3').textContent;
+        
+        currentSong.textContent = songTitle;
+        nowPlaying.style.display = 'block';
+      }
+
+      hideNowPlaying() {
+        const nowPlaying = document.getElementById('nowPlaying');
+        nowPlaying.style.display = 'none';
+      }
+    }
+
+    // Initialize the music player when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      new MusicPlayer();
+    });
+
+    // Add some interactive effects
+    document.querySelectorAll('.song-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-5px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>

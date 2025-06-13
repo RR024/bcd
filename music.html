@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Controller</title>
+    <style>
+        .music-controller {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .music-controller:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .music-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8A2BE2 0%, #FF69B4 100%);
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .music-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .volume-control {
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .volume-slider {
+            width: 60px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #ddd;
+            outline: none;
+            border-radius: 2px;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #8A2BE2;
+            cursor: pointer;
+        }
+        
+        .volume-icon {
+            font-size: 16px;
+            margin-right: 5px;
+            color: #555;
+        }
+        
+        /* Animation for play/pause button */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .music-btn.playing {
+            animation: pulse 2s infinite ease-in-out;
+            background: linear-gradient(135deg, #FF69B4 0%, #8A2BE2 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Music Controller -->
+    <div class="music-controller">
+        <button id="musicToggle" class="music-btn">
+            ▶
+        </button>
+        <div class="music-title" id="musicTitle">Birthday Music</div>
+        <div class="volume-control">
+            <span class="volume-icon">🔊</span>
+            <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeControl">
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_c6e2fc8792.mp3?filename=happy-birthday-music-box-138111.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicToggle = document.getElementById('musicToggle');
+            const bgMusic = document.getElementById('bgMusic');
+            const volumeControl = document.getElementById('volumeControl');
+            
+            // Set initial volume
+            bgMusic.volume = volumeControl.value;
+            
+            // Play/Pause toggle
+            musicToggle.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicToggle.textContent = '⏸';
+                    musicToggle.classList.add('playing');
+                } else {
+                    bgMusic.pause();
+                    musicToggle.textContent = '▶';
+                    musicToggle.classList.remove('playing');
+                }
+            });
+            
+            // Volume control
+            volumeControl.addEventListener('input', function() {
+                bgMusic.volume = this.value;
+            });
+            
+            // Add this script to each page to ensure music continues
+            // First check if music should be playing
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                bgMusic.play();
+                musicToggle.textContent = '⏸';
+                musicToggle.classList.add('playing');
+            }
+            
+            // Store music state when changed
+            bgMusic.addEventListener('play', function() {
+                localStorage.setItem('musicPlaying', 'true');
+            });
+            
+            bgMusic.addEventListener('pause', function() {
+                localStorage.setItem('musicPlaying', 'false');
+            });
+            
+            // Apply volume from localStorage if available
+            if (localStorage.getItem('musicVolume')) {
+                const savedVolume = localStorage.getItem('musicVolume');
+                bgMusic.volume = savedVolume;
+                volumeControl.value = savedVolume;
+            }
+            
+            // Store volume when changed
+            volumeControl.addEventListener('change', function() {
+                localStorage.setItem('musicVolume', this.value);
+            });
+        });
+
+        // Music controller integration script
+document.addEventListener('DOMContentLoaded', function() {
+    // Create the music controller element
+    const musicControllerHTML = `
+    <div class="music-controller">
+        <button id="musicToggle" class="music-btn">
+            ▶
+        </button>
+        <div class="music-title" id="musicTitle">Birthday Music</div>
+        <div class="volume-control">
+            <span class="volume-icon">🔊</span>
+            <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeControl">
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_c6e2fc8792.mp3?filename=happy-birthday-music-box-138111.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    `;
+    
+    // Create a style element
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        .music-controller {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .music-controller:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .music-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8A2BE2 0%, #FF69B4 100%);
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .music-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .volume-control {
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .volume-slider {
+            width: 60px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #ddd;
+            outline: none;
+            border-radius: 2px;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #8A2BE2;
+            cursor: pointer;
+        }
+        
+        .volume-icon {
+            font-size: 16px;
+            margin-right: 5px;
+            color: #555;
+        }
+        
+        /* Animation for play/pause button */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .music-btn.playing {
+            animation: pulse 2s infinite ease-in-out;
+            background: linear-gradient(135deg, #FF69B4 0%, #8A2BE2 100%);
+        }
+    `;
+    
+    // Add the style to head
+    document.head.appendChild(styleElement);
+    
+    // Create a div to hold the music controller
+    const musicControllerDiv = document.createElement('div');
+    musicControllerDiv.innerHTML = musicControllerHTML;
+    
+    // Add the music controller to the body
+    document.body.appendChild(musicControllerDiv.firstElementChild);
+    document.body.appendChild(musicControllerDiv.lastElementChild);
+    
+    // Now add the functionality
+    const musicToggle = document.getElementById('musicToggle');
+    const bgMusic = document.getElementById('bgMusic');
+    const volumeControl = document.getElementById('volumeControl');
+    
+    // Set initial volume
+    bgMusic.volume = volumeControl.value;
+    
+    // Play/Pause toggle
+    musicToggle.addEventListener('click', function() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            musicToggle.textContent = '⏸';
+            musicToggle.classList.add('playing');
+        } else {
+            bgMusic.pause();
+            musicToggle.textContent = '▶';
+            musicToggle.classList.remove('playing');
+        }
+    });
+    
+    // Volume control
+    volumeControl.addEventListener('input', function() {
+        bgMusic.volume = this.value;
+    });
+    
+    // First check if music should be playing
+    if (localStorage.getItem('musicPlaying') === 'true') {
+        bgMusic.play();
+        musicToggle.textContent = '⏸';
+        musicToggle.classList.add('playing');
+    }
+    
+    // Store music state when changed
+    bgMusic.addEventListener('play', function() {
+        localStorage.setItem('musicPlaying', 'true');
+    });
+    
+    bgMusic.addEventListener('pause', function() {
+        localStorage.setItem('musicPlaying', 'false');
+    });
+    
+    // Apply volume from localStorage if available
+    if (localStorage.getItem('musicVolume')) {
+        const savedVolume = localStorage.getItem('musicVolume');
+        bgMusic.volume = savedVolume;
+        volumeControl.value = savedVolume;
+    }
+    
+    // Store volume when changed
+    volumeControl.addEventListener('change', function() {
+        localStorage.setItem('musicVolume', this.value);
+    });
+});
+    </script>
+</body>
+</html>

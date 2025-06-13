@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Message</title>
+    <style>
+        /* Root variables */
+        :root {
+            --primary-color: #8A2BE2;
+            --accent-color: #FF69B4;
+            --text-color: #333;
+            --light-color: #E6E6FA;
+            --highlight-color: #00BFFF;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E6E6FA 0%, #B57EDC 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        /* Enhanced Final Message Styling */
+        .final-message {
+            position: relative;
+            z-index: 2;
+            margin: 60px auto 30px;
+            max-width: 800px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 30px rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            overflow: hidden;
+        }
+
+        /* Decorative elements */
+        .final-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--highlight-color), var(--primary-color), var(--accent-color));
+            background-size: 200% 100%;
+            animation: gradient-shift 8s infinite linear;
+        }
+
+        .final-message::after {
+            content: '✨';
+            position: absolute;
+            font-size: 60px;
+            color: rgba(138, 43, 226, 0.05);
+            top: 20px;
+            right: 20px;
+            transform: rotate(20deg);
+        }
+
+        .final-message h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .final-message h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .final-message-content {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .final-message-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-message-content p:first-child,
+        .final-message-content p:nth-last-child(2),
+        .final-message-content p:last-child {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .final-message-content p:last-child {
+            text-align: right;
+            margin-right: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .final-message center {
+            margin-top: 30px;
+        }
+
+        .final-message h3 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        .final-message p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .final-message h4 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: var(--primary-color);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        .final-message h4:last-of-type {
+            animation-delay: 1s;
+            margin-bottom: 30px;
+            color: var(--highlight-color);
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 15s infinite linear;
+        }
+        
+        /* Poetry Button Styling */
+        .poetry-button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            transform: translateY(0);
+        }
+        
+        .poetry-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+        }
+        
+        .poetry-button:active {
+            transform: translateY(1px);
+        }
+        
+        .poetry-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .poetry-button:hover::before {
+            left: 100%;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 25px 0;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 1.5s;
+        }
+
+        /* Animations */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(120vh) rotate(0deg); }
+            100% { transform: translateY(-20vh) rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .final-message {
+                padding: 25px 20px;
+                margin: 40px 15px;
+            }
+            
+            .final-message h2 {
+                font-size: 1.8rem;
+            }
+            
+            .final-message h3 {
+                font-size: 1.8rem;
+            }
+            
+            .final-message-content p {
+                font-size: 1rem;
+            }
+            
+            .poetry-button {
+                padding: 10px 25px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative floating elements -->
+    <div class="floating-element" style="left: 10%; top: 30px; font-size: 30px;">🎂</div>
+    <div class="floating-element" style="left: 85%; top: 100px; font-size: 25px;">🎁</div>
+    <div class="floating-element" style="left: 20%; top: 80%; font-size: 35px;">🎈</div>
+    <div class="floating-element" style="left: 75%; top: 70%; font-size: 28px;">✨</div>
+    <div class="floating-element" style="left: 40%; top: 20%; font-size: 22px;">🎉</div>
+
+    <!-- Main content -->
+    <div class="final-message">
+        <h2>A Message From Me</h2>
+        <div class="final-message-content">
+            <p>Dear Bestie,</p>
+            <p>From our first conversation to our latest adventure, you've been the friend I can always count on. Your kindness, humor, and incredible spirit make every day brighter.</p>
+            <p>Happy Birthday to my partner in crime, shoulder to cry on, and the person who gets all my weird jokes.</p>
+            <p>Here's to another year of memories, inside jokes, and friendship that only gets stronger with time.</p>
+            <p>Love you always,</p>
+            <p>Your Best Friend</p>
+            <p>~RR</p>
+        </div>
+        <center>
+            <h3>Wait a minute..!</h3>
+            <p>Inum un surprise mudila</p>
+            <h4>For sure this will be final part</h4>
+            <h4>And here is the kutty kavithai for you...</h4>
+            
+            <div class="button-container">
+                <a href="poet.html" class="poetry-button">
+                    <span>✨ Read My Kavithai ✨</span>
+                </a>
+            </div>
+        </center>
+    </div>
+</body>
+</html>

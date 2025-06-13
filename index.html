@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown</title>
+    <link rel="stylesheet" href="wish.css">
+    <link rel="stylesheet" href="wish-2.css">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation" id="bgAnimation"></div>
+    
+    <!-- Theme Selector -->
+    <div class="theme-selector">
+        <div class="theme-option pastel" data-theme="pastel"></div>
+        <div class="theme-option ocean" data-theme="ocean"></div>
+        <div class="theme-option sunset" data-theme="sunset"></div>
+    </div>
+    
+    <div class="container">
+        <h1>Birthday Countdown</h1>
+        
+        <!-- Photo Gallery -->
+        <div class="photo-gallery">
+            <div class="gallery-container">
+                <div class="photo-item">
+                    <div class="photo-placeholder">Add your favorite photo here</div>
+                </div>
+            </div>
+            <div class="gallery-prev" >&#10094;</div>
+            <div class="gallery-next">&#10095;</div>
+        </div>
+        
+        <!-- Countdown Timer -->
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+        <!-- Bucket List Section -->
+<div class="bucket-list-section">
+    <h2 class="bucket-list-title">Birthday Bucket List</h2>
+    <p class="bucket-list-intro">What's on your birthday wish list this year?</p>
+    
+    <div class="bucket-list-container">
+        <div class="bucket-list-items" id="bucketListItems">
+            <!-- List items will appear here -->
+        </div>
+        
+        <form class="bucket-list-form" id="bucketListForm">
+            <input type="text" class="bucket-list-input" id="bucketListInput" placeholder="Add a wish to your bucket list..." required>
+            <button type="submit" class="bucket-list-submit">Add</button>
+        </form>
+    </div>
+    
+    <div class="bucket-list-suggestions">
+        <p>Need inspiration? Try these:</p>
+        <div class="suggestion-buttons">
+            <button class="suggestion-btn" data-suggestion="Travel to a new country">Travel</button>
+            <button class="suggestion-btn" data-suggestion="Learn a new skill">New skill</button>
+            <button class="suggestion-btn" data-suggestion="Try exotic food">Food adventure</button>
+            <button class="suggestion-btn" data-suggestion="Go on a spontaneous road trip">Road trip</button>
+        </div>
+    </div>
+</div>
+        
+
+        <!-- Wish Generator -->
+        <div class="wish-generator">
+            <button class="wish-button" id="generateWishBtn">Generate Birthday Wish</button>
+            <div class="wish-display" id="wishDisplay">Click the button to generate a special birthday wish!</div>
+        </div>
+        
+<!-- Timeline Section -->
+<div class="timeline-section">
+    <div class="timeline-header">
+        <h2 class="timeline-title">Birthday Timeline</h2>
+    </div>
+    <div class="timeline-container">
+        <!-- Birth event (left side) -->
+        <div class="timeline-event left" data-image="/api/placeholder/400/300" data-extended-description="The day you were born! Just 7 pounds and already making everyone smile. The beginning of a wonderful journey.">
+        <center><div class="timeline-date">Birth</div></center>
+            <div class="timeline-description">Where it all began! Welcome to the world!</div>
+            <div class="timeline-hover-preview">
+                <div class="preview-image">
+                    <img src="../wish/photos/tl-1.jpg" alt="">
+                </div>
+                <div class="preview-text">The day you were born! Just 7 pounds and already making everyone smile. The beginning of a wonderful journey.</div>
+            </div>
+        </div>
+        
+        <div class="timeline-line"></div>
+        
+        <!-- 1 Year Ago (right side) -->
+        <div class="timeline-event right" data-image="/api/placeholder/400/300" data-extended-description="We had an amazing time at the local cake festival. Everyone came dressed in dessert-themed outfits, and we tried over 20 different cakes!">
+            <center><div class="timeline-date">1 Year Ago</div></center>
+            <div class="timeline-description">Last year's birthday celebration at the Cake fest</div>
+            <div class="timeline-hover-preview">
+                <div class="preview-image">
+                    <img src="../wish/photos/tl-4.jpg" alt="">
+                </div>
+                <div class="preview-text">We had an amazing time at the local cake festival. Everyone came dressed in dessert-themed outfits, and we tried over 20 different cakes!</div>
+            </div>
+        </div>
+        
+        <!-- 5 Years Ago (left side) -->
+        <div class="timeline-event left" data-image="/api/placeholder/400/300" data-extended-description="The surprise party at the beach house. We managed to keep it a secret for months! Your face when everyone jumped out was priceless.">
+            <center><div class="timeline-date">5 Years Ago</div></center>
+            <div class="timeline-description">Remember that surprise party we threw? That was amazing!</div>
+            <div class="timeline-hover-preview">
+                <div class="preview-image">
+                    <img src="../wish/photos/IMG_20250521_231059.jpg" alt="">
+                </div>
+                <div class="preview-text">The surprise party at the beach house. We managed to keep it a secret for months! Your face when everyone jumped out was priceless.</div>
+            </div>
+        </div>
+        
+        <!-- 10 Years Ago (right side) -->
+        <div class="timeline-event right" data-image="/api/placeholder/400/300" data-extended-description="Your 10th birthday with that giant chocolate cake shaped like the number 10. You were so proud to reach double digits!">
+        <center><div class="timeline-date">10 Years Ago</div></center>
+            <div class="timeline-description">Your first double-digit birthday. You were so excited!</div>
+            <div class="timeline-hover-preview">
+                <div class="preview-image">
+                    <img src="../wish/photos/tl-2.jpg" alt="">
+                </div>
+                <div class="preview-text">Your 10th birthday with that giant chocolate cake shaped like the number 10. You were so proud to reach double digits!</div>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="finger-pointer">👇🏻</div>
+        <div class="button-text">Click the button</div>
+        <a href="puzzle.html" style="text-decoration: none;">
+          <button class="btn-class-name">
+            <span class="back"></span>
+            <span class="front"></span>
+          </button>
+        </a>
+      </div>
+    <script src="wish.js"></script>
+</body>
+</html>
